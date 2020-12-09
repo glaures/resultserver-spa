@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: "/mannschaftsstaerken",
+        alias: "/",
         name: "strenghts",
         component: TeamStrengthView
     }
