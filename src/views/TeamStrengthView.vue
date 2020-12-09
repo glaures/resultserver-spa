@@ -58,6 +58,15 @@
                      min="0"
                      max="10"/>
             </div>
+            <div class="form-group input-group-sm col-3">
+              <label for="challengeLevelInput">Liga-Level</label>
+              <input v-model.number="settings.challenge.level"
+                     id="challengeLevelInput"
+                     class="form-control"
+                     type="number"
+                     min="1"
+                     max="10"/>
+            </div>
           </div>
         </div>
       </div>
@@ -125,7 +134,10 @@ export default {
         id: 0,
         minStrength: 0,
         maxStrength: 100,
-        flatFactor: 0
+        flatFactor: 0,
+        challenge: {
+          level: 1
+        }
       },
       teams: [],
       snapshots: []
@@ -187,7 +199,7 @@ export default {
     saveSnapshot(snapshot) {
       this.$api.post('/teamstrengthsnapshots', snapshot).then(response => {
         this.updateView(response.data)
-      });
+      }).catch(error => this.$emit('error', error.response.data));
     },
     addSnapshot() {
       this.$api.put('/teamstrengthsnapshots', null, {
@@ -225,7 +237,7 @@ export default {
         }
       }).then(response => {
         this.updateView(response.data);
-      })
+      }).catch(error => this.$emit('error', error.response.data));
     },
     settings: {
       handler(newVal, oldVal) {
@@ -244,12 +256,13 @@ export default {
 </script>
 
 <style>
-  td {
-    border-left: 1px solid lightgrey;
-  }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+td {
+  border-left: 1px solid lightgrey;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>
