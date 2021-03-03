@@ -99,10 +99,10 @@
               <cld-image
                   :publicId="team.cloudinaryId"
                   width="20"
-                  height="20"
                   crop="fill"
                   dpr="auto"
-                  responsive="true"/>
+                  responsive="true"
+                  defaultImage="deutschland"/>
               <span class="ml-2">{{ team.name }}</span>
             </div>
           </th>
