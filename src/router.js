@@ -1,15 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TeamStrengthView from "./views/TeamStrengthView";
+import LoginView from "./views/LoginView";
+import MatchesView from "@/views/MatchesView";
 
 Vue.use(VueRouter)
 
 const routes = [
     {
-        path: "/mannschaftsstaerken",
+        path: "/spiele",
         alias: "/",
+        name: "matches",
+        component: MatchesView
+    },
+    {
+        path: "/mannschaftsstaerken",
         name: "strenghts",
         component: TeamStrengthView
+    },
+    {
+        path: '/anmelden',
+        name: 'login',
+        component: LoginView
     }
 ];
 

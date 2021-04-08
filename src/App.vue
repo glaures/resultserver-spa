@@ -1,23 +1,33 @@
 <template>
   <div>
-    <router-view @error="error = $event"/>
-    <div v-if="error"
-         class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{ error.message }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
-  name: 'Resultserver-Admin-Console',
-  data() {
-    return {
-      error: null
+  async created() {
+    if (this.$route.name !== 'login') {
+      console.log('trying autoLogin')
+      await this.$store.dispatch('autoLogin')
+      if (!this.$store.getters.loggedIn) {
+        console.log('autoLogin failed')
+        await this.$router.push({name: 'login'})
+      } else {
+        console.log('autoLogin successful')
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['message'])
+  },
+  methods: {
+    ...mapActions(['clearMessages'])
+  },
+  watch: {
+    message() {
     }
   }
 }
