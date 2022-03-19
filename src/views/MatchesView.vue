@@ -29,6 +29,7 @@
                 <span v-if="match.matchStateEnum === 2" class="badge-pill badge-warning">läuft</span>
                 <span v-if="match.matchStateEnum === 3" class="badge-pill badge-info">beendet</span>
                 <span v-if="match.matchStateEnum === 4" class="badge-pill badge-danger">abgesagt</span>
+                <span v-if="match.matchStateEnum === 5" class="badge-pill badge-danger">abgebrochen</span>
               </div>
               <div class="d-table-cell">
                 {{ $luxon(match.start, "HH:mm") }}
